@@ -315,3 +315,93 @@ h1 {
         height: 200px;
     }
 }
+
+/* Видео с настраиваемым расположением */
+.custom-video {
+    position: absolute;
+    /* Позиция и размер будут задаваться через JS */
+    z-index: 3;
+    object-fit: cover; /* или contain в зависимости от нужного эффекта */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Дополнительные картинки с настраиваемым расположением */
+.custom-image {
+    position: absolute;
+    /* Позиция и размер будут задаваться через JS */
+    z-index: 3;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+
+.mel-image {
+    background-image: url('mel.jpg');
+}
+
+.trollface-image {
+    background-image: url('trollface.jpg');
+}
+
+/* Текст слева - поверх всего */
+.left-poem {
+    position: absolute;
+    z-index: 9999;
+    backdrop-filter: blur(2px); /* Уменьшил блюр в 2 раза */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    width: 400px; /* Оригинальная ширина */
+}
+
+.poem-text {
+    text-align: center;
+    width: 100%;
+    padding: 0 5px; /* Всего 5px отступов от краёв рамки до текста */
+    box-sizing: border-box;
+}
+
+.poem-text p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    /* Теперь текст будет вплотную к краям с отступом всего 5px */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Адаптивность для текста */
+@media (max-width: 768px) {
+    .left-poem {
+        width: 350px !important;
+        font-size: 16px !important;
+        left: 15px !important;
+        top: 20px !important;
+    }
+    
+    .poem-text {
+        padding: 0 5px; /* Сохраняем маленькие отступы */
+    }
+}
+
+@media (max-width: 480px) {
+    .left-poem {
+        width: 300px !important;
+        font-size: 14px !important;
+        left: 10px !important;
+        top: 10px !important;
+    }
+    
+    .poem-text {
+        padding: 0 5px; /* Сохраняем маленькие отступы */
+    }
+}

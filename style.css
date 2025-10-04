@@ -1,0 +1,317 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    position: relative;
+    background: #000;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+.greeting {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+    width: 90%;
+    max-width: 800px;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 6rem;
+    margin: 0;
+    position: relative;
+    color: transparent; /* Прячем исходный текст */
+}
+
+/* Создаём псевдоэлемент с градиентом */
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 6rem;
+    margin: 0;
+    position: relative;
+    color: #ffff00; /* Запасной цвет */
+}
+
+h1::before {
+    content: 'АЛИНА С ДНЁМ РОЖДЕНИЯ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        #ff0080, #00ffff, #ffff00, #00ff00, #8000ff, #ff0080);
+    background-size: 400% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: neonRainbow 2s linear infinite;
+    text-shadow: none; /* Убираем тени у псевдоэлемента */
+}
+
+/* Тени применяем к основному элементу */
+h1 {
+    text-shadow: 
+        -1px -1px 0 #fff,
+        1px -1px 0 #fff,
+        -1px 1px 0 #fff,
+        1px 1px 0 #fff,
+        0 0 5px #ff0080,
+        0 0 10px #00ffff,
+        0 0 15px #ffff00,
+        0 0 20px #00ff00;
+    font-weight: bold;
+    letter-spacing: 2px;
+    filter: brightness(1.2) saturate(1.5);
+}
+
+@keyframes neonRainbow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+/* Боковые гифки */
+.side-gif {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 1200px; /* Увеличил в 2 раза (было 600px) */
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.left-gif {
+    left: 0;
+}
+
+.right-gif {
+    right: 0;
+}
+
+/* Увеличиваем размер гифок в 2 раза */
+.side-gif::before,
+.side-gif::after,
+.side-gif .sparkle-item {
+    content: '';
+    position: absolute;
+    width: 800px; /* Увеличил в 2 раза (было 400px) */
+    height: 800px; /* Увеличил в 2 раза (было 400px) */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.left-gif::before { 
+    top: 0%; 
+    left: 100px;
+}
+.left-gif::after { 
+    top: 33%; 
+    left: 300px;
+}
+.left-gif .sparkle-item:nth-child(1) { 
+    top: 66%; 
+    left: 100px;
+}
+
+.right-gif::before { 
+    top: 0%; 
+    right: 100px;
+    transform: scaleX(-1);
+}
+.right-gif::after { 
+    top: 33%; 
+    right: 300px;
+    transform: scaleX(-1);
+}
+.right-gif .sparkle-item:nth-child(1) { 
+    top: 66%; 
+    right: 100px;
+    transform: scaleX(-1);
+}
+
+.sparkle-item {
+    position: absolute;
+    width: 800px; /* Увеличил в 2 раза (было 400px) */
+    height: 800px; /* Увеличил в 2 раза (было 400px) */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@media (max-width: 768px) {
+    .side-gif {
+        width: 600px;
+    }
+    
+    .side-gif::before,
+    .side-gif::after,
+    .side-gif .sparkle-item {
+        width: 400px; /* Увеличил для мобильных */
+        height: 400px;
+    }
+    
+    .left-gif::before,
+    .left-gif .sparkle-item:nth-child(1),
+    .right-gif::before,
+    .right-gif .sparkle-item:nth-child(1) {
+        left: 80px;
+        right: 80px;
+    }
+    
+    .left-gif::after,
+    .right-gif::after {
+        left: 240px;
+        right: 240px;
+    }
+}
+
+@media (max-width: 480px) {
+    .side-gif {
+        width: 400px;
+    }
+    
+    .side-gif::before,
+    .side-gif::after,
+    .side-gif .sparkle-item {
+        width: 250px; /* Увеличил для маленьких экранов */
+        height: 250px;
+    }
+    
+    .left-gif::before,
+    .left-gif .sparkle-item:nth-child(1),
+    .right-gif::before,
+    .right-gif .sparkle-item:nth-child(1) {
+        left: 60px;
+        right: 60px;
+    }
+    
+    .left-gif::after,
+    .right-gif::after {
+        left: 180px;
+        right: 180px;
+    }
+}
+
+/* Новые гифки сверху - прижаты к самым углам */
+.top-gif {
+    position: absolute;
+    top: 0; /* Уперлись в самый верх */
+    width: 600px;
+    height: 600px;
+    z-index: 4; /* Высокий z-index */
+    pointer-events: none;
+    opacity: 0.9;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.left-top-gif {
+    left: 0; /* Прижата к самому левому краю */
+    background-image: url('BSGIF1.gif');
+    background-position: left top; /* Прижимаем к левому верхнему углу */
+}
+
+.right-top-gif {
+    right: 0; /* Прижата к самому правому краю */
+    background-image: url('BSGIF2.gif');
+    background-position: right top; /* Прижимаем к правому верхнему углу */
+}
+
+/* Боковые гифки - уменьшаем z-index */
+.side-gif {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 1200px;
+    z-index: 2; /* Оставляем как есть */
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+/* Картинка в левом нижнем углу - также увеличиваем z-index */
+.corner-image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
+    background-image: url('corner-image.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 4; /* Увеличил z-index чтобы была поверх боковых гифок */
+    opacity: 0.9;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.7));
+}
+
+/* Композиция window + person */
+.window-composition {
+    position: absolute;
+    /* Позиция будет задаваться через JS */
+    width: 400px;
+    height: 400px;
+    z-index: 3;
+}
+
+.window-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('window.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+}
+
+.person-image {
+    position: absolute;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 70%;
+    background-image: url('person.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    z-index: 2;
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
+}
+
+@media (max-width: 768px) {
+    .window-composition {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .window-composition {
+        width: 200px;
+        height: 200px;
+    }
+}
